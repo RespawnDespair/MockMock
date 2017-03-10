@@ -1,6 +1,5 @@
 package com.mockmock;
 
-import com.sorcix.sirc.IrcServer;
 import org.springframework.stereotype.Service;
 
 import java.util.HashSet;
@@ -10,9 +9,14 @@ import java.util.Set;
 public class Settings
 {
     /**
+     * Whether to show console output when receiving email.
+     */
+    private boolean showEmailInConsole = false;
+
+    /**
      * The default port where MockMock will run on
      */
-    private int smtpPort = 25000;
+    private int smtpPort = 25;
 
     /**
      * The default port for the http server
@@ -23,31 +27,6 @@ public class Settings
      * The maximum size the mail queue may be
      */
     private int maxMailQueueSize = 1000;
-
-	/**
-	 * Whether or not to connect to the IRC server
-	 */
-	private boolean connectToIrc = false;
-
-    /**
-     * The irc server to connect to
-     */
-    private String ircServer = "irc.tweakers.net";
-
-    /**
-     * The port of the irc server to connect to
-     */
-    private int ircPort = IrcServer.DEFAULT_PORT;
-
-    /**
-     * The nickname to use on irc
-     */
-    private String nickname = "mockmock";
-
-    /**
-     * A set of irc channels to join
-     */
-    private Set<String> channels = new HashSet<>();
 
 	/**
 	 * A set of "From" email addresses to filter
@@ -65,9 +44,14 @@ public class Settings
     private String staticFolderPath;
 
 
-    public Settings()
+    public boolean getShowEmailInConsole()
     {
-        this.channels.add("#postman");
+        return showEmailInConsole;
+    }
+
+    public void setShowEmailInConsole(boolean showEmailInConsole)
+    {
+        this.showEmailInConsole = showEmailInConsole;
     }
 
     public int getSmtpPort() {
@@ -93,46 +77,6 @@ public class Settings
     public void setMaxMailQueueSize(int maxMailQueueSize) {
         this.maxMailQueueSize = maxMailQueueSize;
     }
-
-    public String getIrcServer() {
-        return ircServer;
-    }
-
-    public void setIrcServer(String ircServer) {
-        this.ircServer = ircServer;
-    }
-
-    public int getIrcPort() {
-        return ircPort;
-    }
-
-    public void setIrcPort(int ircPort) {
-        this.ircPort = ircPort;
-    }
-
-    public String getNickname() {
-        return nickname;
-    }
-
-    public void setNickname(String nickname) {
-        this.nickname = nickname;
-    }
-
-    public Set<String> getChannels() {
-        return channels;
-    }
-
-    public void setChannels(Set<String> channels) {
-        this.channels = channels;
-    }
-
-	public boolean isConnectToIrc() {
-		return connectToIrc;
-	}
-
-	public void setConnectToIrc(boolean connectToIrc) {
-		this.connectToIrc = connectToIrc;
-	}
 
 	public Set<String> getFilterFromEmailAddresses() {
 		return filterFromEmailAddresses;
